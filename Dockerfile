@@ -27,7 +27,14 @@ ENV CLICKHOUSE_DB="**None**" \
     BACKUP_KEEP_MONTHS=6 \
     BACKUP_KEEP_MINS=1440 \
     HEALTHCHECK_PORT=8080 \
+    WEBHOOK_URL="**https://github.com/prodrigestivill/docker-postgres-backup-local/None**" \
+    WEBHOOK_ERROR_URL="**None**" \
+    WEBHOOK_PRE_BACKUP_URL="**None**" \
+    WEBHOOK_POST_BACKUP_URL="**None**" \
+    WEBHOOK_EXTRA_ARGS=""
 
+
+COPY hooks /hooks
 COPY backup.sh env.sh init.sh /
 
 RUN chmod +x /init.sh /backup.sh /env.sh
