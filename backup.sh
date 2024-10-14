@@ -2,20 +2,7 @@
 
 set -Eeo pipefail
 
-HOOKS_DIR="/hooks"
-if [ -d "${HOOKS_DIR}" ]; then
-  on_error(){
-    run-parts -a "error" "${HOOKS_DIR}"
-  }
-  trap 'on_error' ERR
-fi
-
 source "$(dirname "$0")/env.sh"
-
-# Pre-backup hook
-if [ -d "${HOOKS_DIR}" ]; then
-  run-parts -a "pre-backup" --exit-on-error "${HOOKS_DIR}"
-fi
 
 #Initialize dirs
 mkdir -p "${BACKUP_DIR}/last/" "${BACKUP_DIR}/daily/" "${BACKUP_DIR}/weekly/" "${BACKUP_DIR}/monthly/"
@@ -123,8 +110,3 @@ clickhouse-client \
 done
 
 echo "SQL backup created successfully"
-
-# Post-backup hook
-if [ -d "${HOOKS_DIR}" ]; then
-  run-parts -a "post-backup" --reverse --exit-on-error "${HOOKS_DIR}"
-fi

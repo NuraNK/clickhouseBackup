@@ -11,14 +11,10 @@ RUN set -x \
     && chmod a+x /usr/local/bin/go-cron
 
 ENV CLICKHOUSE_DB="**None**" \
-    CLICKHOUSE_DB_FILE="**None**" \
     CLICKHOUSE_HOST="**None**" \
-    CLICKHOUSE_PORT=9000 \
     CLICKHOUSE_USER="**None**" \
-    CLICKHOUSE_USER_FILE="**None**" \
     CLICKHOUSE_PASSWORD="**None**" \
-    CLICKHOUSE_PASSWORD_FILE="**None**" \
-    CLICKHOUSE_PASSFILE_STORE="**None**" \
+    CLICKHOUSE_PORT=9000 \
     SEND_TIMEOUT=300 \
     RECEIVE_TIMEOUT=300 \
     SCHEDULE="@daily" \
@@ -31,12 +27,6 @@ ENV CLICKHOUSE_DB="**None**" \
     BACKUP_KEEP_MONTHS=6 \
     BACKUP_KEEP_MINS=1440 \
     HEALTHCHECK_PORT=8080 \
-    WEBHOOK_URL="**None**" \
-    WEBHOOK_ERROR_URL="**None**" \
-    WEBHOOK_PRE_BACKUP_URL="**None**" \
-    WEBHOOK_POST_BACKUP_URL="**None**" \
-    WEBHOOK_EXTRA_ARGS=""
-
 
 COPY hooks /hooks
 COPY backup.sh env.sh init.sh /
