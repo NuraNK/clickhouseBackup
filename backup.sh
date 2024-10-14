@@ -35,7 +35,14 @@ for DB in ${CLICKHOUSE_DBS}; do
 
   #Create dump
   echo "Creating dump of ${DB} database from ${CLICKHOUSE_HOST}..."
-  clickhouse-client --host="${CLICKHOUSE_HOST}" --receive_timeout=${RECEIVE_TIMEOUT} --send_timeout=${SEND_TIMEOUT} --query="BACKUP DATABASE ${DB} TO Disk('backups', '${LAST_FILENAME}');"
+clickhouse-client \
+    --host="${CLICKHOUSE_HOST}" \
+    --user="${CLICKHOUSE_USER}" \
+    --password="${CLICKHOUSE_PASSWORD}" \
+    --port="${CLICKHOUSE_PORT}" \
+    --receive_timeout="${RECEIVE_TIMEOUT}" \
+    --send_timeout="${SEND_TIMEOUT}" \
+    --query="BACKUP DATABASE ${DB} TO Disk('backups', '${LAST_FILENAME}');"
 
   if [ ! -f "${BACKUP_DIR}/${LAST_FILENAME}" ]; then
       echo "Error: backup file ${LAST_FILENAME} not found."
