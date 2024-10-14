@@ -28,7 +28,6 @@ ENV CLICKHOUSE_DB="**None**" \
     BACKUP_KEEP_MINS=1440 \
     HEALTHCHECK_PORT=8080 \
 
-COPY hooks /hooks
 COPY backup.sh env.sh init.sh /
 
 RUN chmod +x /init.sh /backup.sh /env.sh
