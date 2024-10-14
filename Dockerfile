@@ -19,6 +19,8 @@ ENV CLICKHOUSE_DB="**None**" \
     CLICKHOUSE_PASSWORD="**None**" \
     CLICKHOUSE_PASSWORD_FILE="**None**" \
     CLICKHOUSE_PASSFILE_STORE="**None**" \
+    SEND_TIMEOUT=300 \
+    RECEIVE_TIMEOUT=300 \
     SCHEDULE="@daily" \
     BACKUP_ON_START="FALSE" \
     BACKUP_DIR="/backups" \
@@ -34,6 +36,7 @@ ENV CLICKHOUSE_DB="**None**" \
     WEBHOOK_PRE_BACKUP_URL="**None**" \
     WEBHOOK_POST_BACKUP_URL="**None**" \
     WEBHOOK_EXTRA_ARGS=""
+
 
 COPY hooks /hooks
 COPY backup.sh env.sh init.sh /
